@@ -1,0 +1,25 @@
+name: Code Formatter Check
+
+on: [push, pull_request]
+
+jobs:
+  formatter:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        pip install black
+
+    - name: Run black to check formatting
+      run: |
+        black --check --diff .
+
