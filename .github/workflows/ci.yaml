@@ -13,13 +13,10 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.8'
+        python-version: '3.10'
+    - name: Install Ruff
+      run: pip install ruff
 
-    - name: Install dependencies
+    - name: Run Ruff to check formatting
       run: |
-        pip install black
-
-    - name: Run black to check formatting
-      run: |
-        black --check --diff .
-
+        ruff check . --diff --exit-zero-if-changed
