@@ -26,31 +26,36 @@ def get_state_data(state, df):
     return state_df, combined_data
 
 
-if __name__ == "__main__":
-    df = pd.read_csv("data/president_polls_cleaned.csv")
-    state = "Texas"
+def state_pie_chart(combined_data):
+    """
+    Generates a pie chart for state poll results.
 
-    state_df, combined_data = get_state_data(state, df)
+    This function takes a DataFrame containing candidate names and their respective votes,
+    combines candidates with less than 2% of the total votes into an 'Other' category,
+    and then generates a pie chart displaying the vote distribution.
 
-    # Combine small percentage candidates into 'Other' category
+    Parameters:
+    combined_data (pd.DataFrame): A DataFrame with columns 'candidate_name' and 'votes'
+                                  representing the candidates and their respective vote counts.
+
+    Returns:
+    None: The function displays a pie chart and does not return any value.
+    """
+
     threshold = 0.02  # 5% threshold
     total_votes = combined_data["votes"].sum()
     combined_data["percentage"] = combined_data["votes"] / total_votes
 
-    # Separate major candidates and others
     major_candidates = combined_data[combined_data["percentage"] >= threshold]
     other_candidates = combined_data[combined_data["percentage"] < threshold]
 
-    # Sum votes for 'Other' category
     other_votes = other_candidates["votes"].sum()
     other_row = pd.DataFrame(
         [["Other", other_votes]], columns=["candidate_name", "votes"]
     )
 
-    # Combine major candidates with 'Other' category
     final_data = pd.concat([major_candidates, other_row], ignore_index=True)
 
-    # Make pie chart of final data
     plt.figure(figsize=(10, 10))
     plt.pie(
         final_data["votes"],
@@ -59,3 +64,12 @@ if __name__ == "__main__":
     )
     plt.title(f"{state} Poll Results")
     plt.show()
+    return
+
+
+if __name__ == "__main__":
+    df = pd.read_csv("data/president_polls_cleaned.csv")
+    state = "Texas"
+
+    state_df, combined_data = get_state_data(state, df)
+    state_pie_chart(combined_data)
