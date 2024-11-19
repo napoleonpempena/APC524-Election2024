@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US 2024 Election Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #chart-container {
+            width: 80%;
+            margin: auto;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>US 2024 Election Results</h1>
+    <div id="chart-container">
+        <canvas id="electionChart"></canvas>
+    </div>
+
+    <script src="fetch_script.js"></script>
+        async function fetchData() {
+            const response = await fetch('election_data.json');
+            const data = await response.json();
+            return data;
+        }
+
+        function createChart(data) {
+            const ctx = document.getElementById('electionChart').getContext('2d');
+            const candidates = data.map(result => result.candidate);
+            const votes = data.map(result => result.votes);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: candidates,
+                    datasets: [{
+                        label: 'Votes',
+                        data: votes,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Fetch data and render the chart
+        fetchData().then(data => createChart(data));
+    </script>
+</body>
+</html>
+
