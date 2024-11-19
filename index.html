@@ -23,7 +23,7 @@
         <canvas id="electionChart"></canvas>
     </div>
 
-    <script>
+    <script src="fetch_script.js"></script>
         async function fetchData() {
             const response = await fetch('election_data.json');
             const data = await response.json();
