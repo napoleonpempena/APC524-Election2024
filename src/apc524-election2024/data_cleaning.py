@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 df = pd.read_csv("data/president_polls.csv")
 
@@ -50,6 +51,8 @@ df = df.drop(
     ]
 )
 
+# Add column for total voters (pct/100 * sample size)
+df["votes"] = np.round(df["sample_size"] * df["pct"] / 100)
 print(df)
 
 df.to_csv("data/president_polls_cleaned.csv", index=False)
