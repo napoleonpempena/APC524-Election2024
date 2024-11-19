@@ -55,4 +55,10 @@ df = df.drop(
 df["votes"] = np.round(df["sample_size"] * df["pct"] / 100)
 print(df)
 
+# Change format of start_date and end_date columns
+df["start_date"] = pd.to_datetime(df["start_date"])
+df["end_date"] = pd.to_datetime(df["end_date"])
+
+print(df)
+
 df.to_csv("data/president_polls_cleaned.csv", index=False)
