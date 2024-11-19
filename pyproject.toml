@@ -16,11 +16,6 @@ dependencies = [
     "requests"
 ]
 
-[project.dependencies]
-numpy = "^1.21.0"
-matplotlib = "^3.4.0"
-pandas = "2.2.0"
-
 [project.optional-dependencies]
 test = [
     "pytest",
