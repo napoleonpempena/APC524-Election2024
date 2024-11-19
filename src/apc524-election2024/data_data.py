@@ -3,6 +3,18 @@ from pie_chart import pie_chart
 
 
 def get_date_data(date, df):
+    """
+    Extracts and processes data for a specific date from election DataFrame.
+
+    Parameters:
+    date (str): The date for which data is to be extracted.
+    df (pandas.DataFrame): The DataFrame containing the election data.
+
+    Returns:
+    tuple: A tuple containing:
+        - date_df (pandas.DataFrame): The DataFrame filtered by the specified date
+        - combined_df (pandas.DataFrame): The DataFrame grouped by 'candidate_name' with relevant voting data
+    """
     date_df = df[df["end_date"] == date]
     date_df = date_df.drop(columns=["end_date"])
     date_df = date_df.dropna()
