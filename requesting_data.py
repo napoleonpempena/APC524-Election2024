@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-
+from requests.exceptions import HTTPError, ConnectionError, Timeout
 def fetch_election_data():
     # Replace with the actual API endpoint or data source
     url = "https://api.official-election-site.com/results"
