@@ -3,22 +3,35 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "example"
+name = "APC Final Project"
 version = "0.1.0"
+description = "Project to analyze election data, predict results, and serve to audience via a website"
+readme = "README.md"
 requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "pandas",
+    "bs4",
+    "requests"
+]
 
 [project.dependencies]
 numpy = "^1.21.0"
 matplotlib = "^3.4.0"
 pandas = "2.2.0"
-json = "1.6.3"
-  [project]
-  dependencies = [
-      "numpy>=1.20"
-      "matplotlib>=3.4.0"
-  ]
+
 [project.optional-dependencies]
-test = ["pytest"]
+test = [
+    "pytest",
+    "nox"
+]
+
+docs = [
+    "sphinx",
+    "furo",
+    "myst_parser"
+]
 
 [tool.ruff.lint]
 extend-select = [
