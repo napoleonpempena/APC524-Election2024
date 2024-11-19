@@ -8,7 +8,7 @@ def build_path(site, poll_type, jurisdiction):
     if jurisdiction.lower() == "national":
         specifier = "president/general/2024/trump-vs-harris"
     else:
-        specifier = "president/general/2024/{0}/trump-vs-harris".format(jurisdiction)
+        specifier = f"president/general/2024/{jurisdiction}/trump-vs-harris"
 
     path = os.path.join(site, specifier)
 

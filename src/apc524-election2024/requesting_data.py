@@ -20,8 +20,7 @@ def fetch_election_data():
     except json.JSONDecodeError as e:
         logging.error(f"Failed to decode JSON response: {e}")
         return
-    print(f"Error fetching data: {e}")
-
+    
 if __name__ == "__main__":
     while True:
         fetch_election_data()
