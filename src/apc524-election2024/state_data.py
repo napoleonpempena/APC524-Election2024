@@ -28,15 +28,34 @@ def get_state_data(state, df):
 
 if __name__ == "__main__":
     df = pd.read_csv("data/president_polls_cleaned.csv")
+    state = "Texas"
 
-    state_df, combined_data = get_state_data("New Jersey", df)
+    state_df, combined_data = get_state_data(state, df)
 
-    # Make pie chart of combined data
+    # Combine small percentage candidates into 'Other' category
+    threshold = 0.02  # 5% threshold
+    total_votes = combined_data["votes"].sum()
+    combined_data["percentage"] = combined_data["votes"] / total_votes
+
+    # Separate major candidates and others
+    major_candidates = combined_data[combined_data["percentage"] >= threshold]
+    other_candidates = combined_data[combined_data["percentage"] < threshold]
+
+    # Sum votes for 'Other' category
+    other_votes = other_candidates["votes"].sum()
+    other_row = pd.DataFrame(
+        [["Other", other_votes]], columns=["candidate_name", "votes"]
+    )
+
+    # Combine major candidates with 'Other' category
+    final_data = pd.concat([major_candidates, other_row], ignore_index=True)
+
+    # Make pie chart of final data
     plt.figure(figsize=(10, 10))
     plt.pie(
-        combined_data["votes"],
-        labels=combined_data["candidate_name"],
+        final_data["votes"],
+        labels=final_data["candidate_name"],
         autopct="%1.1f%%",
     )
-    plt.title("New Jersey Poll Results")
+    plt.title(f"{state} Poll Results")
     plt.show()
