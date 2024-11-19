@@ -48,4 +48,4 @@ jobs:
 
       - name: Run Ruff to check formatting
         run: |
-          ruff check . --diff --exit-zero-if-changed
+          ruff check . --diff --exit-zero
