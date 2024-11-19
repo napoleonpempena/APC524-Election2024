@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0  # Use the latest version from https://github.com/pre-commit/pre-commit-hooks/releases
+    hooks:
+      - id: trailing-whitespace
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: "v0.6.8"
+    hooks:
+      - id: ruff
+        args: [--fix, --show-fixes]
+      - id: ruff-format
