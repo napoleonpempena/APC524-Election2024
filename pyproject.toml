@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "APC524-Election2024"
-version = "0.2.0"
+version = "0.3.0"
 description = "Project to analyze election data, predict results, and serve to audience via a website"
 readme = "README.md"
 requires-python = ">=3.10"
