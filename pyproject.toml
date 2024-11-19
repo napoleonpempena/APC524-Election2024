@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "APC Final Project"
+name = "APC524-Election2024"
 version = "0.1.0"
 description = "Project to analyze election data, predict results, and serve to audience via a website"
 readme = "README.md"
@@ -33,3 +33,9 @@ extend-select = [
   "B",
   "UP",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/apc524_election2024"]
+
+[tool.hatch.metadata]
+dynamic = ["version"]
