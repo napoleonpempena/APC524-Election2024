@@ -19,7 +19,8 @@ dependencies = [
 [project.optional-dependencies]
 test = [
     "pytest",
-    "nox"
+    "nox",
+    "pandas"
 ]
 
 docs = [
