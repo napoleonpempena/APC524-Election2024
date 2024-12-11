@@ -1,20 +1,18 @@
 import pandas as pd
 import numpy as np
 
-def data_pulling() -> pd.DataFrame:
+def state_nan_cleaner(data: pd.DataFrame) -> pd.DataFrame:
 
-    ''' Pull data from a remote source. In this case, we use FiveThirtyEight's polling aggregate. 
+    ''' Function to filter out nan values and replace them with representative "National" label.
 
+    Args:
+    - data (pandas DataFrame): DataFrame with state names and nan values
     Returns:
-    - df (pd.DataFrame): raw DataFrame with polling data.
+    - data (pandas DataFrame): DataFrame with state names and filtered values
     '''
 
-    # Define the URL.
-    url = 'https://projects.fivethirtyeight.com/polls/data/president_polls.csv'
-    # Pull the data into a Pandas DataFrame.
-    df = pd.read_csv(url)
-
-    return df
+    data['state'] = data['state'].fillna("National")
+    return data
 
 def data_pruning(df: pd.DataFrame,
                  save_csv: bool=True) -> pd.DataFrame:
