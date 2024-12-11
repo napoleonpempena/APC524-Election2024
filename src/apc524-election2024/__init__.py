@@ -9,7 +9,7 @@ app = Dash(__name__, external_stylesheets=external_stylesheets)
 
 data = pd.read_csv('data/president_polls_cleaned.csv')
 
-app = election_dashboard.app_generator(app)
+app = election_dashboard.generate_app(app)
 server = app.server
 
 if __name__ == '__main__':
