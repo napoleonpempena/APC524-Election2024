@@ -10,19 +10,6 @@ import date_data
 # Set global color scheme for consistent colormap
 PLOTLY_COLORS = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52']
 
-def state_nan_cleaner(data: pd.DataFrame) -> pd.DataFrame:
-
-    ''' Function to filter out nan values and replace them with representative "National" label.
-
-    Args:
-    - data (pandas DataFrame): DataFrame with state names and nan values
-    Returns:
-    - data (pandas DataFrame): DataFrame with state names and filtered values
-    '''
-
-    data['state'] = data['state'].fillna("National")
-    return data
-
 def likely_candidates(data: pd.DataFrame, N: int=5) -> pd.DataFrame:
 
     ''' Function to pare down number of candidates based on polling composites.
@@ -49,14 +36,14 @@ def likely_candidates(data: pd.DataFrame, N: int=5) -> pd.DataFrame:
 #  Note that Dash and Plotly function seamlessly with global variables in this script. 
 #####################################################################################
 
-# Load data 
+# Load cleaned data 
 data = pd.read_csv('data/president_polls_cleaned.csv')
 # Convert data columns with dates to datetime objects
 df = date_data.datetime_assignment(data)
 # Filter out unlikely candidates
 df = likely_candidates(df)
 # Convert 'NaN' values to 'Other'
-df = state_nan_cleaner(df)
+df = data_cleaning.state_nan_cleaner(df)
 # Turn date range to Unix second convention
 start_date_seconds, end_date_seconds = [pd.Timestamp(df['start_date'].min()).timestamp(),
                                         pd.Timestamp(df['end_date'].max()).timestamp()]
