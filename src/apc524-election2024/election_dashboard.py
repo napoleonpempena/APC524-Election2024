@@ -25,27 +25,20 @@ def likely_candidates(data,
 
     return data
 
-@callback(
-    Output('intermediate-value', 'data'),
-    Input('candidate_name-checkbox', 'dummy'))
-def data_processor(dummy):
-
-    data = pd.read_csv('data/president_polls_cleaned.csv')
-    # Convert data columns with dates to datetime objects
-    df = datetime_assignment(data)
-    # Filter out unlikely candidates
-    df = likely_candidates(df)
-    # Convert 'NaN' values to 'Other'
-    df = state_nan_cleaner(df)
-    # Turn date range to Unix second convention
-    start_date_seconds, end_date_seconds = [pd.Timestamp(df['start_date'].min()).timestamp(),
-                                            pd.Timestamp(df['end_date'].max()).timestamp()]
-    # Define intervals for slider mark ticks
-    step_interval = 86400 * 30 # approximately 1 month
-    # Define intervals for slider mark tick labels
-    mark_interval = df[['start_date', 'end_date']].resample('6M', on='start_date').min().index
-
-    return df.to_json('cleaned.json')
+data = pd.read_csv('data/president_polls_cleaned.csv')
+# Convert data columns with dates to datetime objects
+df = datetime_assignment(data)
+# Filter out unlikely candidates
+df = likely_candidates(df)
+# Convert 'NaN' values to 'Other'
+df = state_nan_cleaner(df)
+# Turn date range to Unix second convention
+start_date_seconds, end_date_seconds = [pd.Timestamp(df['start_date'].min()).timestamp(),
+                                        pd.Timestamp(df['end_date'].max()).timestamp()]
+# Define intervals for slider mark ticks
+step_interval = 86400 * 30 # approximately 1 month
+# Define intervals for slider mark tick labels
+mark_interval = df[['start_date', 'end_date']].resample('6M', on='start_date').min().index
 
 def generate_app(app):
 
@@ -87,14 +80,11 @@ def generate_app(app):
 
 @callback(
     Output('graph-with-slider', 'figure'),
-    Input('memory-output', 'data'),
     Input('candidate_name-checkbox', 'value'),
     Input('state_name-dropdown', 'value'),
     Input('data_display-checkbox', 'value'),
     Input('date_range-slider', 'value'))
-def update_figure(data, candidate_names, state_name, data_display, date_values):
-
-    df = pd.read_json(data)
+def update_figure(candidate_names, state_name, data_display, date_values):
 
     ''' Date filtering. '''
     start, end = date_values
