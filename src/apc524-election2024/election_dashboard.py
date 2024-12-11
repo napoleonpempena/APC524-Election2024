@@ -43,6 +43,7 @@ def data_processor(app, data):
     mark_interval = df[['start_date', 'end_date']].resample('6M', on='start_date').min().index
 
     app.layout = html.Div([
+        dcc.Store(id='memory-output'),
         html.Div([
             dcc.Checklist(df['candidate_name'].sort_values().unique(),
                         ['Kamala Harris', 'Donald Trump'],
@@ -79,13 +80,14 @@ def data_processor(app, data):
 
 @callback(
     Output('graph-with-slider', 'figure'),
+    Input('memory-output', 'data'),
     Input('candidate_name-checkbox', 'value'),
     Input('state_name-dropdown', 'value'),
     Input('data_display-checkbox', 'value'),
     Input('date_range-slider', 'value'))
-def update_figure(candidate_names, state_name, data_display, date_values):
+def update_figure(data, candidate_names, state_name, data_display, date_values):
 
-    _, af = data_processor(app, data)
+    df = pd.DataFrame(data)
 
     ''' Date filtering. '''
     start, end = date_values
