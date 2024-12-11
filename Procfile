@@ -1,1 +1,1 @@
-web: gunicorn app:server
+web: gunicorn --chdir src/apc524-election2024 app:server
