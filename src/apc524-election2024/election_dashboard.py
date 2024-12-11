@@ -92,7 +92,7 @@ def data_processor(app, data):
     Input('state_name-dropdown', 'value'),
     Input('data_display-checkbox', 'value'),
     Input('date_range-slider', 'value'))
-def update_figure(candidate_names, state_name, data_display, date_values):
+def update_figure(candidate_names, state_name, data_display, date_values, df):
 
     ''' Date filtering. '''
     start, end = date_values
