@@ -87,7 +87,11 @@ def data_processor(app, data):
     Input('date_range-slider', 'value'))
 def update_figure(data, candidate_names, state_name, data_display, date_values):
 
+    print(data)
+
     df = pd.DataFrame(data)
+
+    print(df)
 
     ''' Date filtering. '''
     start, end = date_values
