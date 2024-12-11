@@ -26,7 +26,7 @@ def likely_candidates(data,
     return data
 
 @callback(
-    Output('intermediate-value', 'data'))
+    Output('intermediate-value', 'data'),
     Input('candidate_name-checkbox', 'dummy'))
 def data_processor(dummy):
 
