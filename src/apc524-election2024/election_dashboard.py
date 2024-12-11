@@ -25,7 +25,10 @@ def likely_candidates(data,
 
     return data
 
-def data_processor(app, data):
+@callback(
+    Output('intermediate-value', 'data'))
+    Input('candidate_name-checkbox', 'dummy'))
+def data_processor(dummy):
 
     data = pd.read_csv('data/president_polls_cleaned.csv')
     # Convert data columns with dates to datetime objects
@@ -41,6 +44,10 @@ def data_processor(app, data):
     step_interval = 86400 * 30 # approximately 1 month
     # Define intervals for slider mark tick labels
     mark_interval = df[['start_date', 'end_date']].resample('6M', on='start_date').min().index
+
+    return df.to_json('cleaned.json')
+
+def generate_app(app):
 
     app.layout = html.Div([
         dcc.Store(id='memory-output'),
@@ -76,7 +83,7 @@ def data_processor(app, data):
                             id='date_range-slider'),
         ], style={'width': '100%', 'display': 'inline-block'})
     ])
-    return app, df
+    return app
 
 @callback(
     Output('graph-with-slider', 'figure'),
@@ -87,11 +94,7 @@ def data_processor(app, data):
     Input('date_range-slider', 'value'))
 def update_figure(data, candidate_names, state_name, data_display, date_values):
 
-    print(data)
-
-    df = pd.DataFrame(data)
-
-    print(df)
+    df = pd.read_json(data)
 
     ''' Date filtering. '''
     start, end = date_values
