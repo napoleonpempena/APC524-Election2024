@@ -5,14 +5,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 PLOTLY_COLORS = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52']
-# Import data
-# data = pd.read_csv('president_polls_cleaned.csv')
-# Import stylesheet
-# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-# Initialize Dash application
-# app = Dash(__name__, external_stylesheets=external_stylesheets)
-
-# server = app.server
 
 def datetime_assignment(data):
     ''' Change columns with datetimes to datetime data types. '''
@@ -83,8 +75,7 @@ def data_processor(app, data):
                             id='date_range-slider'),
         ], style={'width': '100%', 'display': 'inline-block'})
     ])
-
-    return app
+    return app, df
 
 @callback(
     Output('graph-with-slider', 'figure'),
@@ -92,7 +83,9 @@ def data_processor(app, data):
     Input('state_name-dropdown', 'value'),
     Input('data_display-checkbox', 'value'),
     Input('date_range-slider', 'value'))
-def update_figure(candidate_names, state_name, data_display, date_values, df):
+def update_figure(candidate_names, state_name, data_display, date_values):
+
+    _, af = data_processor(app, data)
 
     ''' Date filtering. '''
     start, end = date_values
