@@ -1,3 +1,6 @@
+from dash import Dash, dcc, html, Input, Output, callback
+import pandas as pd
+pd.options.mode.chained_assignment = None
 import election_dashboard
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
