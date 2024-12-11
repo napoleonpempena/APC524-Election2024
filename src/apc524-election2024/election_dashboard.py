@@ -4,26 +4,11 @@ pd.options.mode.chained_assignment = None
 import plotly.express as px
 import plotly.graph_objects as go
 
+# Local imports
+import date_data
+
 # Set global color scheme for consistent colormap
 PLOTLY_COLORS = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52']
-
-def datetime_assignment(data: pd.DataFrame) -> pd.DataFrame:
-
-    ''' Change columns with datetimes to datetime data types.
-
-    Args:
-    - data (pandas DataFrame): DataFrame with datetime values
-    Returns:
-    - data (pandas DataFrame): DataFrame with re-typed datetime values
-
-    '''
-
-    # Columns over which to look for date data
-    date_columns = ['start_date', 'end_date']
-    # Change data types
-    data[date_columns] = data[date_columns].apply(pd.to_datetime)
-
-    return data
 
 def state_nan_cleaner(data: pd.DataFrame) -> pd.DataFrame:
 
@@ -67,7 +52,7 @@ def likely_candidates(data: pd.DataFrame, N: int=5) -> pd.DataFrame:
 # Load data 
 data = pd.read_csv('data/president_polls_cleaned.csv')
 # Convert data columns with dates to datetime objects
-df = datetime_assignment(data)
+df = date_data.datetime_assignment(data)
 # Filter out unlikely candidates
 df = likely_candidates(df)
 # Convert 'NaN' values to 'Other'
