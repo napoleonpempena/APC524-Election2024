@@ -34,6 +34,8 @@ def likely_candidates(data,
     return data
 
 def data_processor(app, data):
+
+    data = pd.read_csv('data/president_polls_cleaned.csv')
     # Convert data columns with dates to datetime objects
     df = datetime_assignment(data)
     # Filter out unlikely candidates
