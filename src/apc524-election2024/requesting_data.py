@@ -4,7 +4,7 @@ import time
 import logging
 from requests.exceptions import HTTPError, ConnectionError, Timeout
 
-def fetch_election_data():
+def fetch_election_data() -> None:
     # Replace with the actual API endpoint or data source
     url = "https://api.official-election-site.com/results"
 
