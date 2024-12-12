@@ -31,6 +31,26 @@ jobs:
       - name: Run tests
         run: pytest
 
+  build:
+    runs-on: ubuntu-latest
+    env: 
+      PYTHONPATH: /src/apc524-election2024/
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install pandas dependency
+      run: pip install pandas
+
+    - name: Install requests dependency
+      run: pip install requests
+
   formatter:
     name: Code Formatter Check
     runs-on: ubuntu-latest
