@@ -55,7 +55,7 @@ mark_interval = df[['start_date', 'end_date']].resample('6M', on='start_date').m
 
 ''' End data processing. '''
 
-def generate_app(app):
+def generate_app(app: dash.Dash) -> dash.Dash:
 
     ''' Method to generate Dash app HTML layout and callback functions.
 
@@ -110,12 +110,21 @@ def generate_app(app):
     Input('state_name-dropdown', 'value'),
     Input('data_display-checkbox', 'value'),
     Input('date_range-slider', 'value'))
-def update_figure(candidate_names, state_name, data_display, date_values):
+def update_figure(candidate_names: dcc.Input,
+                  state_name: dcc.Input,
+                  data_display: dcc.Input,
+                  date_values: dcc.Input):
 
     ''' Method to allow dynamic updates to the output figure based on user inputs.
 
     Args: Dash inputs from interactive elements defined in the Dash application layout.
     '''
+
+    # Dash value checks
+    assert(candidate_names) == iter(candidate_names)
+    assert(len(candidate_names) > 0)
+    assert(isinstance(state_name, str))
+    assert(len(date_values)) == 2
 
     ''' Date filtering. '''
     start, end = date_values
