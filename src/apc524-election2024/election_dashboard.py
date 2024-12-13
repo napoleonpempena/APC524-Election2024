@@ -39,6 +39,8 @@ def likely_candidates(data: pd.DataFrame, N: int=5) -> pd.DataFrame:
 
 # Load cleaned data 
 data = pd.read_csv('data/president_polls_cleaned.csv')
+# Load prediction model data
+model_df = pd.read_csv('data/model_prediction.csv')
 # Convert data columns with dates to datetime objects
 df = date_data.datetime_assignment(data)
 # Filter out unlikely candidates
@@ -84,7 +86,7 @@ def generate_app(app: dash.Dash) -> dash.Dash:
         # Create checklist to let user decide data display method
         html.Div([
             dcc.Checklist(
-                ['All polls', 'Composite polling average'],
+                ['All polls', 'Composite polling average', 'National modeled polling average'],
                 ['Composite polling average'],
                 inline=True,
                 id='data_display-checkbox')
@@ -129,8 +131,10 @@ def update_figure(candidate_names: dcc.Input,
     ''' Date filtering. '''
     start, end = date_values
     df['start_date-unix'] = df['start_date'].apply(pd.Timestamp.timestamp)
+    model_df['start_date-unix'] = model_df['start_date'].apply(pd.Timestamp.timestamp)
     # Filter data by date values
     filtered_df = df[(df['start_date-unix'] >= start) & (df['start_date-unix'] <= end)]
+    filtered_model_df = model_df[(model_df['start_date-unix'] >= start) & (model_df['start_date-unix'] <= end)]
 
     ''' Candidate filtering. '''
     filtered_df = filtered_df[filtered_df['candidate_name'].isin(candidate_names)]
@@ -148,6 +152,9 @@ def update_figure(candidate_names: dcc.Input,
         fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name')
     elif data_display == ['Composite polling average']:
         fig = px.line(composite_monthly_average_reindexed, x='start_date', y='pct', color='candidate_name', markers=True)
+    elif data_display == ['National modeled polling average']:
+        fig = px.line(composite_monthly_average_reindexed, x='start_date', y='rep_model_prediction', color='#636EFA', markers=True)
+        fig = px.line(composite_monthly_average_reindexed, x='start_date', y='dem_model_prediction', color='#EF553B', markers=True)
     elif sorted(data_display) == ['All polls', 'Composite polling average']:
         fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name')
         for entry_index, entry in enumerate(filtered_df['candidate_name'].unique()):
