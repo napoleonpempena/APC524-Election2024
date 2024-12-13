@@ -12,7 +12,7 @@ jobs:
     name: "Tests on Python ${{ matrix.python-version }} for ${{ matrix.runs-on }}"
     runs-on: ${{ matrix.runs-on }}
     env: 
-      PYTHONPATH: /src/apc524-election2024/
+      PYTHONPATH: /src/apc524_election2024/
     strategy:
       fail-fast: false
       matrix:
@@ -101,9 +101,9 @@ jobs:
 
       - name: Run mypy
         run: |
-          mypy data_cleaning.py
-          mypy date_data.py
-          mypy pie_chart.py
-          mypy requesting_data.py
-          mypy scraper.py
-          mypy state_data.py
+          mypy src/apc524_election2024/data_cleaning.py
+          mypy src/apc524_election2024/date_data.py
+          mypy src/apc524_election2024/pie_chart.py
+          mypy src/apc524_election2024/requesting_data.py
+          mypy src/apc524_election2024/scraper.py
+          mypy src/apc524_election2024/state_data.py
