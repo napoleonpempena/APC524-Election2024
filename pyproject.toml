@@ -20,7 +20,8 @@ dependencies = [
 test = [
     "pytest",
     "nox",
-    "pandas"
+    "pandas",
+    "requests"
 ]
 
 docs = [
