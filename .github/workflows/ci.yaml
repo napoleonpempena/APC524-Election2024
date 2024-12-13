@@ -12,7 +12,7 @@ jobs:
     name: "Tests on Python ${{ matrix.python-version }} for ${{ matrix.runs-on }}"
     runs-on: ${{ matrix.runs-on }}
     env: 
-      PYTHONPATH: /home/runner/work/APC524-Election2024/APC524-Election2024/src/apc524-election2024/
+      PYTHONPATH: /home/runner/work/APC524-Election2024/APC524-Election2024/src/apc524-election2024/ pytest
     strategy:
       fail-fast: false
       matrix:
