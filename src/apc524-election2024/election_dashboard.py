@@ -166,8 +166,9 @@ def update_figure(candidate_names: dcc.Input,
     elif data_display == ['Composite polling average']:
         fig = px.line(composite_monthly_average_reindexed, x='start_date', y='pct', color='candidate_name', markers=True)
     elif data_display == ['National modeled polling average']:
-        fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name')
-        fig.update_traces(opacity=0)
+        # fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name')
+        # fig.update_traces(opacity=0)
+        fig = go.Figure()
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
                         y=composite_monthly_average_reindexed_modeled['rep_model_prediction'],
                         line=go.scatter.Line(color=PLOTLY_COLORS[0]))
