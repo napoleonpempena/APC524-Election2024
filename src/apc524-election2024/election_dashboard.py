@@ -185,6 +185,23 @@ def update_figure(candidate_names: dcc.Input,
                         y=composite_monthly_average_reindexed_modeled['dem_model_prediction'],
                         line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
                         name='REP modeled')
+    elif data_display == ['Composite polling average', 'National modeled polling average']:
+        fig = go.Figure()
+        for entry_index, entry in enumerate(filtered_df['candidate_name'].unique()):
+            candidate_entry = composite_monthly_average_reindexed.loc[composite_monthly_average_reindexed['candidate_name'] == entry]
+            fig.add_scatter(x=candidate_entry['start_date'],
+                            y=candidate_entry['pct'],
+                            mode='lines',
+                            name=entry,
+                            line=go.scatter.Line(color=PLOTLY_COLORS[entry_index]),)
+        fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
+                        y=composite_monthly_average_reindexed_modeled['rep_model_prediction'],
+                        line=go.scatter.Line(color=PLOTLY_COLORS[1], dash="dash"),
+                        name='DEM modeled')
+        fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
+                        y=composite_monthly_average_reindexed_modeled['dem_model_prediction'],
+                        line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
+                        name='REP modeled')
     elif sorted(data_display) == ['All polls', 'Composite polling average']:
         fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name')
         for entry_index, entry in enumerate(filtered_df['candidate_name'].unique()):
