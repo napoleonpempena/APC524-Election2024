@@ -31,14 +31,14 @@ jobs:
       - name: Install package and test dependencies
         run: pip install pytest
 
-      - name: Install pandas dependency
-        run: pip install pandas
-
-      - name: Install requests dependency
-        run: pip install requests
-
       - name: Run tests
-        run: pytest
+        run: |
+          pytest tests/test_data_cleaning.py
+          pytest tests/test_date_data.py
+          pytest tests/test_pie_chart.py
+          pytest tests/test_requesting_data.py
+          pytest tests/test_scraper.py
+          pytest tests/test_state_data.py
 
   build:
     runs-on: ubuntu-latest
