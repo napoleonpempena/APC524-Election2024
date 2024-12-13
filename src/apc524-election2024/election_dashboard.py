@@ -150,7 +150,7 @@ def update_figure(candidate_names: dcc.Input,
             composite_monthly_average_reindexed = composite_monthly_average.reindex(months, level=1).ffill()
             composite_monthly_average_reindexed = composite_monthly_average_reindexed.reset_index(level=0).reset_index()
         else:
-            composite_monthly_average = input_dataframe.resample('W', on='start_date')[['dem_model_prediction', 'rep_model_prediction']].mean().dropna()
+            composite_monthly_average = input_dataframe.resample('W', on='start_date')[['dem_model_prediction', 'rep_model_prediction']].mean().dropna().reset_index()
             months = pd.date_range(start=input_dataframe['start_date'].min(), end=input_dataframe['start_date'].max(), freq='W')
             # composite_monthly_average_reindexed = composite_monthly_average.reset_index()
             composite_monthly_average_reindexed = composite_monthly_average
