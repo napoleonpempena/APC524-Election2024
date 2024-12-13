@@ -1,3 +1,4 @@
+from pathlib import Path
 import pandas as pd
 import numpy as np
 import pytest
@@ -56,7 +57,7 @@ def sample_data():
     }
     return pd.DataFrame(data)
 
-def test_data_cleaning(sample_data, tmp_path):
+def test_data_cleaning(sample_data: pd.DataFrame, tmp_path: Path):
     # Save sample data to a temporary CSV file
     sample_data_path = tmp_path / "president_polls.csv"
     sample_data.to_csv(sample_data_path, index=False)
@@ -112,7 +113,7 @@ def test_data_cleaning(sample_data, tmp_path):
         ]
     )
 
-    df["votes"] = np.round(df["sample_size"] * df["pct"] / 100)
+    df["votes"] = np.round(df["sample_size"] * df["pct"] / 100).astype(float)
     df["start_date"] = pd.to_datetime(df["start_date"])
     df["end_date"] = pd.to_datetime(df["end_date"])
 
