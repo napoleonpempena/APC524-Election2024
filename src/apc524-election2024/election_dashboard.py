@@ -135,7 +135,7 @@ def update_figure(candidate_names: dcc.Input,
     model_df['start_date-unix'] = model_df['start_date'].apply(pd.Timestamp.timestamp)
     # Filter data by date values
     filtered_df = df[(df['start_date-unix'] >= start) & (df['start_date-unix'] <= end)]
-    filtered_model_df = model_df[(model_df['start_date-unix'] >= start.timestamp()) & (model_df['start_date-unix'] <= end.timestamp())]
+    filtered_model_df = model_df[(model_df['start_date-unix'] >= start) & (model_df['start_date-unix'] <= end)]
 
     ''' Candidate filtering. '''
     filtered_df = filtered_df[filtered_df['candidate_name'].isin(candidate_names)]
@@ -157,7 +157,7 @@ def update_figure(candidate_names: dcc.Input,
 
     ''' Calculate composite monthly averages. '''
     composite_monthly_average_reindexed = monthly_compositor(filtered_df)
-    composite_monthly_average_reindexed_modeled = monthly_compositor(model_df)
+    composite_monthly_average_reindexed_modeled = monthly_compositor(filtered_model_df)
     composite_monthly_average_reindexed_modeled['start_date'] = composite_monthly_average_reindexed_modeled.index
 
     # Conditional filtering based on user inputs - poll scatter and trendline formatting features
