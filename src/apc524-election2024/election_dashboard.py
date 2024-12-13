@@ -142,11 +142,18 @@ def update_figure(candidate_names: dcc.Input,
     ''' State filtering. '''
     filtered_df = filtered_df[filtered_df['state'] == state_name]
 
+    def monthly_compositor(input_dataframe: pd.DataFrame) -> pd.DataFrame:
+
+        composite_monthly_average = input_dataframe.groupby('candidate_name').resample('W', on='start_date')[['votes', 'pct']].mean()
+        months = pd.date_range(start=input_dataframe['start_date'].min(), end=input_dataframe['start_date'].max(), freq='W')
+        composite_monthly_average_reindexed = composite_monthly_average.reindex(months, level=1).ffill()
+        composite_monthly_average_reindexed = composite_monthly_average_reindexed.reset_index(level=0).reset_index()
+
+        return composite_monthly_average_reindexed
+
     ''' Calculate composite monthly averages. '''
-    composite_monthly_average = filtered_df.groupby('candidate_name').resample('W', on='start_date')[['votes', 'pct']].mean()
-    months = pd.date_range(start=filtered_df['start_date'].min(), end=filtered_df['start_date'].max(), freq='W')
-    composite_monthly_average_reindexed = composite_monthly_average.reindex(months, level=1).ffill()
-    composite_monthly_average_reindexed = composite_monthly_average_reindexed.reset_index(level=0).reset_index()
+    composite_monthly_average_reindexed = monthly_compositor(filtered_df)
+    composite_monthly_average_reindexed_modeled = monthly_compositor(model_df)
 
     # Conditional filtering based on user inputs - poll scatter and trendline formatting features
     if data_display == ['All polls']:
@@ -154,8 +161,8 @@ def update_figure(candidate_names: dcc.Input,
     elif data_display == ['Composite polling average']:
         fig = px.line(composite_monthly_average_reindexed, x='start_date', y='pct', color='candidate_name', markers=True)
     elif data_display == ['National modeled polling average']:
-        fig = px.line(composite_monthly_average_reindexed, x='start_date', y='rep_model_prediction', color='#636EFA', markers=True)
-        fig = px.line(composite_monthly_average_reindexed, x='start_date', y='dem_model_prediction', color='#EF553B', markers=True)
+        fig = px.line(composite_monthly_average_reindexed_modeled, x='start_date', y='rep_model_prediction', color='#636EFA', markers=True)
+        fig = px.line(composite_monthly_average_reindexed_modeled, x='start_date', y='dem_model_prediction', color='#EF553B', markers=True)
     elif sorted(data_display) == ['All polls', 'Composite polling average']:
         fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name')
         for entry_index, entry in enumerate(filtered_df['candidate_name'].unique()):
