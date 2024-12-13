@@ -42,6 +42,7 @@ def likely_candidates(data: pd.DataFrame, N: int=5) -> pd.DataFrame:
 data = pd.read_csv('data/president_polls_cleaned.csv')
 # Load prediction model data
 model_df = pd.read_csv('data/model_prediction.csv')
+model_df['start_date'] = pd.to_datetime(model_df['start_date'])
 # Convert data columns with dates to datetime objects
 df = date_data.datetime_assignment(data)
 # Filter out unlikely candidates
