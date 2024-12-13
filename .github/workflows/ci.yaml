@@ -10,6 +10,8 @@ jobs:
   tests:
     name: "Tests on Python ${{ matrix.python-version }} for ${{ matrix.runs-on }}"
     runs-on: ${{ matrix.runs-on }}
+    env: 
+      PYTHONPATH: /src/apc524-election2024/
     strategy:
       fail-fast: false
       matrix:
@@ -24,6 +26,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+
+      - name: Install pandas dependency
+        run: pip install pandas
+
+      - name: Install requests dependency
+        run: pip install requests
 
       - name: Install package and test dependencies
         run: pip install pytest
