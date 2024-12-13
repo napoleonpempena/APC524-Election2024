@@ -1,6 +1,12 @@
+import sys
+import os
 import pytest
 import pandas as pd
-from src.apc524_election2024.date_data import get_date_data
+
+# Add the src directory to the Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '/src/apc524_election2024')))
+
+from apc524_election2024.date_data import get_date_data
 
 @pytest.fixture
 def sample_data():
