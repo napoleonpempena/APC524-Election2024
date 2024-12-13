@@ -135,7 +135,7 @@ def update_figure(candidate_names: dcc.Input,
     model_df['start_date-unix'] = model_df['start_date'].apply(pd.Timestamp.timestamp)
     # Filter data by date values
     filtered_df = df[(df['start_date-unix'] >= start) & (df['start_date-unix'] <= end)]
-    filtered_model_df = model_df[(model_df['start_date-unix'] >= start) & (model_df['start_date-unix'] <= end)]
+    filtered_model_df = model_df[(model_df['start_date-unix'] >= start.timestamp()) & (model_df['start_date-unix'] <= end.timestamp())]
 
     ''' Candidate filtering. '''
     filtered_df = filtered_df[filtered_df['candidate_name'].isin(candidate_names)]
