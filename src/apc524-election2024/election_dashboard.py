@@ -124,7 +124,6 @@ def update_figure(candidate_names: dcc.Input,
     '''
 
     # Dash value checks
-    assert(candidate_names) == iter(candidate_names)
     assert(len(candidate_names) > 0)
     assert(isinstance(state_name, str))
     assert(len(date_values)) == 2
