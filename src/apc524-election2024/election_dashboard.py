@@ -170,11 +170,11 @@ def update_figure(candidate_names: dcc.Input,
         fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name',
                          marker=dict(opacity=0))
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
-                             y=composite_monthly_average_reindexed_modeled['rep_model_prediction'],
-                             line=go.scatter.Line(color=PLOTLY_COLORS[0])
+                        y=composite_monthly_average_reindexed_modeled['rep_model_prediction'],
+                        line=go.scatter.Line(color=PLOTLY_COLORS[0]))
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
-                             y=composite_monthly_average_reindexed_modeled['dem_model_prediction'],
-                             line=go.scatter.Line(color=PLOTLY_COLORS[1])
+                        y=composite_monthly_average_reindexed_modeled['dem_model_prediction'],
+                        line=go.scatter.Line(color=PLOTLY_COLORS[1]))
     elif sorted(data_display) == ['All polls', 'Composite polling average']:
         fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name')
         for entry_index, entry in enumerate(filtered_df['candidate_name'].unique()):
