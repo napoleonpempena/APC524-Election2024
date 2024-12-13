@@ -113,7 +113,7 @@ def test_data_cleaning(sample_data: pd.DataFrame, tmp_path: Path):
         ]
     )
 
-    df["votes"] = np.round(df["sample_size"] * df["pct"] / 100).astype(float)
+    df["votes"] = np.round(df["sample_size"] * df["pct"] / 100).astype(int)
     df["start_date"] = pd.to_datetime(df["start_date"])
     df["end_date"] = pd.to_datetime(df["end_date"])
 
