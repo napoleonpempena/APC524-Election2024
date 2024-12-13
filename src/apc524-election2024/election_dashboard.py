@@ -10,7 +10,7 @@ import date_data
 import data_cleaning
 
 # Set global color scheme for consistent colormap
-PLOTLY_COLORS = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52']
+PLOTLY_COLORS = ['#EF553B', '#636EFA','#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52']
 
 def likely_candidates(data: pd.DataFrame, N: int=5) -> pd.DataFrame:
 
