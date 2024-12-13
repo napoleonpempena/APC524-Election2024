@@ -30,6 +30,11 @@ docs = [
     "myst_parser"
 ]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src/apc524_election2024"]
+
+
 [tool.ruff.lint]
 extend-select = [
   "B",
