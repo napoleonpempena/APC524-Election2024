@@ -10,7 +10,7 @@ import date_data
 import data_cleaning
 
 # Set global color scheme for consistent colormap
-PLOTLY_COLORS = ['#EF553B', '#636EFA','#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52']
+PLOTLY_COLORS = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52']
 
 def likely_candidates(data: pd.DataFrame, N: int=5) -> pd.DataFrame:
 
@@ -169,21 +169,21 @@ def update_figure(candidate_names: dcc.Input,
         fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name')
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
                         y=composite_monthly_average_reindexed_modeled['rep_model_prediction'],
-                        line=go.scatter.Line(color=PLOTLY_COLORS[1], dash="dash"),
+                        line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
                         name='DEM modeled')
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
                         y=composite_monthly_average_reindexed_modeled['dem_model_prediction'],
-                        line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
+                        line=go.scatter.Line(color=PLOTLY_COLORS[1], dash="dash"),
                         name='REP modeled')
     elif data_display == ['National modeled polling average']:
         fig = go.Figure()
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
                         y=composite_monthly_average_reindexed_modeled['rep_model_prediction'],
-                        line=go.scatter.Line(color=PLOTLY_COLORS[1], dash="dash"),
+                        line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
                         name='DEM modeled')
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
                         y=composite_monthly_average_reindexed_modeled['dem_model_prediction'],
-                        line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
+                        line=go.scatter.Line(color=PLOTLY_COLORS[1], dash="dash"),
                         name='REP modeled')
     elif data_display == ['Composite polling average', 'National modeled polling average']:
         fig = go.Figure()
@@ -196,11 +196,11 @@ def update_figure(candidate_names: dcc.Input,
                             line=go.scatter.Line(color=PLOTLY_COLORS[entry_index]),)
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
                         y=composite_monthly_average_reindexed_modeled['rep_model_prediction'],
-                        line=go.scatter.Line(color=PLOTLY_COLORS[1], dash="dash"),
+                        line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
                         name='DEM modeled')
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
                         y=composite_monthly_average_reindexed_modeled['dem_model_prediction'],
-                        line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
+                        line=go.scatter.Line(color=PLOTLY_COLORS[1], dash="dash"),
                         name='REP modeled')
     elif sorted(data_display) == ['All polls', 'Composite polling average']:
         fig = px.scatter(filtered_df, x='start_date', y='pct', color='candidate_name')
@@ -222,11 +222,11 @@ def update_figure(candidate_names: dcc.Input,
                             line=go.scatter.Line(color=PLOTLY_COLORS[entry_index]),)
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
                         y=composite_monthly_average_reindexed_modeled['rep_model_prediction'],
-                        line=go.scatter.Line(color=PLOTLY_COLORS[1], dash="dash"),
+                        line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
                         name='DEM modeled')
         fig.add_scatter(x=composite_monthly_average_reindexed_modeled['start_date'],
                         y=composite_monthly_average_reindexed_modeled['dem_model_prediction'],
-                        line=go.scatter.Line(color=PLOTLY_COLORS[0], dash="dash"),
+                        line=go.scatter.Line(color=PLOTLY_COLORS[1], dash="dash"),
                         name='REP modeled')
     else:
         fig = px.scatter()
