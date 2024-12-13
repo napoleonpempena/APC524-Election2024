@@ -101,9 +101,9 @@ jobs:
 
       - name: Run mypy
         run: |
-          mypy /src/apc524-election2024/data_cleaning.py
-          mypy /src/apc524-election2024/date_data.py
-          mypy /src/apc524-election2024/pie_chart.py
-          mypy /src/apc524-election2024/requesting_data.py
-          mypy /src/apc524-election2024/scraper.py
-          mypy /src/apc524-election2024/state_data.py
+          mypy src/apc524-election2024/data_cleaning.py
+          mypy src/apc524-election2024/date_data.py
+          mypy src/apc524-election2024/pie_chart.py
+          mypy src/apc524-election2024/requesting_data.py
+          mypy src/apc524-election2024/scraper.py
+          mypy src/apc524-election2024/state_data.py
