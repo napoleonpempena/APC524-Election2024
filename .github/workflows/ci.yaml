@@ -35,21 +35,26 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       PYTHONPATH: /src/apc524-election2024/
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+        include:
+          - python-version: "3.11"
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.10"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
 
-    - name: Install pandas dependency
-      run: pip install pandas
+      - name: Install pandas dependency
+        run: pip install pandas
 
-    - name: Install requests dependency
-      run: pip install requests
+      - name: Install requests dependency
+        run: pip install requests
 
   formatter:
     name: Code Formatter Check
