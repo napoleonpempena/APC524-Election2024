@@ -11,8 +11,6 @@ jobs:
     needs: build
     name: "Tests on Python ${{ matrix.python-version }} for ${{ matrix.runs-on }}"
     runs-on: ${{ matrix.runs-on }}
-    env: 
-      PYTHONPATH: src
     strategy:
       fail-fast: false
       matrix:
@@ -30,6 +28,10 @@ jobs:
 
       - name: Install package and test dependencies
         run: pip install -e .[test]
+
+      - name: Set PYTHONPATH
+      run: |
+        echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV
 
       - name: Run tests
         run: |
