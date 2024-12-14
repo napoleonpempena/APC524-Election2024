@@ -33,12 +33,12 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest tests/test_data_cleaning.py
-          pytest tests/test_date_data.py
-          pytest tests/test_pie_chart.py
-          pytest tests/test_requesting_data.py
-          pytest tests/test_scraper.py
-          pytest tests/test_state_data.py
+          pytest -v tests/test_data_cleaning.py
+          pytest -v tests/test_date_data.py
+          pytest -v tests/test_pie_chart.py
+          pytest -v tests/test_requesting_data.py
+          pytest -v tests/test_scraper.py
+          pytest -v tests/test_state_data.py
 
   build:
     runs-on: ubuntu-latest
