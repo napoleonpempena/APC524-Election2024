@@ -30,8 +30,8 @@ jobs:
         run: pip install -e .[test]
 
       - name: Set PYTHONPATH
-      run: |
-        echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV
+        run: |
+          echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV
 
       - name: Run tests
         run: |
