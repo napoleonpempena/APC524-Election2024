@@ -26,3 +26,11 @@ def docs(session: nox.Session) -> None:
             session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
         else:
             print("Unsupported argument to docs")
+
+@nox.session
+def typecheck(session: nox.Session) -> None:
+    """
+    Run type checking using mypy.
+    """
+    session.install("mypy")
+    session.run("mypy", "src")
