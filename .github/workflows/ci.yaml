@@ -44,7 +44,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    env: 
+    env:
       PYTHONPATH: src
     strategy:
       matrix:
@@ -89,7 +89,7 @@ jobs:
   mypy:
     name: Type Check with mypy
     runs-on: ubuntu-latest
-    env: 
+    env:
       PYTHONPATH: src
     steps:
       - name: Check out the repository
@@ -105,9 +105,9 @@ jobs:
 
       - name: List src
         run: ls -R src
-        
+
       - name: Run mypy
-        run: | 
+        run: |
           mypy src/apc524_election2024/data_cleaning.py
           mypy src/apc524_election2024/date_data.py
           mypy src/apc524_election2024/pie_chart.py

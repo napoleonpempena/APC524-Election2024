@@ -1,6 +1,6 @@
-import pytest
 import pandas as pd
 from src.apc524_election2024.pie_chart import pie_chart
+
 
 def test_pie_chart_no_state_no_date(mocker):
     data = {
@@ -15,6 +15,7 @@ def test_pie_chart_no_state_no_date(mocker):
 
     assert True  # If no exception is raised, the test passes
 
+
 def test_pie_chart_with_state_and_date(mocker):
     data = {
         "candidate_name": ["Candidate A", "Candidate B", "Candidate C", "Candidate D"],
@@ -28,9 +29,16 @@ def test_pie_chart_with_state_and_date(mocker):
 
     assert True  # If no exception is raised, the test passes
 
+
 def test_pie_chart_with_other_category(mocker):
     data = {
-        "candidate_name": ["Candidate A", "Candidate B", "Candidate C", "Candidate D", "Candidate E"],
+        "candidate_name": [
+            "Candidate A",
+            "Candidate B",
+            "Candidate C",
+            "Candidate D",
+            "Candidate E",
+        ],
         "votes": [5000, 3000, 1000, 500, 100],
     }
     df = pd.DataFrame(data)
@@ -40,6 +48,7 @@ def test_pie_chart_with_other_category(mocker):
     pie_chart(df)
 
     assert True  # If no exception is raised, the test passes
+
 
 def test_pie_chart_empty_dataframe(mocker):
     df = pd.DataFrame(columns=["candidate_name", "votes"])

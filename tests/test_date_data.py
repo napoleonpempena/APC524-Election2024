@@ -1,21 +1,21 @@
-import sys
-import os
 import pytest
 import pandas as pd
 
 # Add the src directory to the Python path
-#sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/apc524_election2024')))
+# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/apc524_election2024')))
 
 from src.apc524_election2024.date_data import get_date_data
+
 
 @pytest.fixture
 def sample_data():
     data = {
         "end_date": ["2024-11-04", "2024-11-04", "2024-11-05"],
         "candidate_name": ["Candidate A", "Candidate B", "Candidate A"],
-        "votes": [100, 150, 200]
+        "votes": [100, 150, 200],
     }
     return pd.DataFrame(data)
+
 
 def test_get_date_data(sample_data):
     date = "2024-11-04"
@@ -30,6 +30,7 @@ def test_get_date_data(sample_data):
     assert not combined_df.empty
     assert list(combined_df["candidate_name"]) == ["Candidate B", "Candidate A"]
     assert list(combined_df["votes"]) == [150, 100]
+
 
 def test_get_date_data_no_data(sample_data):
     date = "2024-11-06"

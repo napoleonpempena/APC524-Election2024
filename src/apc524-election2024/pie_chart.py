@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def pie_chart(combined_df=pd.DataFrame(), state=None, date=None) -> None:
+def pie_chart(combined_df=None, state=None, date=None) -> None:
     """
     Generates a pie chart for poll results.
 
@@ -40,7 +40,9 @@ def pie_chart(combined_df=pd.DataFrame(), state=None, date=None) -> None:
         [["Other", other_votes]], columns=["candidate_name", "votes"]
     )
 
-    final_data: pd.DataFrame = pd.concat([major_candidates, other_row], ignore_index=True)
+    final_data: pd.DataFrame = pd.concat(
+        [major_candidates, other_row], ignore_index=True
+    )
 
     plt.figure(figsize=(10, 10))
     plt.pie(

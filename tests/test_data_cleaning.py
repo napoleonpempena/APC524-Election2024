@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 from pandas.testing import assert_frame_equal
 
+
 @pytest.fixture
 def sample_data():
     data = {
@@ -56,6 +57,7 @@ def sample_data():
         "candidate_id": [1, 2, 3],
     }
     return pd.DataFrame(data)
+
 
 def test_data_cleaning(sample_data: pd.DataFrame, tmp_path: Path):
     # Save sample data to a temporary CSV file
