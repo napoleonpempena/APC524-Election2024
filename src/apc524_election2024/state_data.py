@@ -1,5 +1,5 @@
 import pandas as pd
-from pie_chart import pie_chart
+from apc524_election2024.pie_chart import pie_chart
 
 
 def get_state_data(state: str, df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:

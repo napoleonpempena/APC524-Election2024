@@ -29,19 +29,9 @@ jobs:
       - name: Install package and test dependencies
         run: pip install -e .[test]
 
-      - name: Set PYTHONPATH
-        run: |
-          echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV
-
       - name: Run tests
-        run: |
-          pytest -v tests/test_data_cleaning.py
-          pytest -v tests/test_scraper.py
-          pytest -v tests/test_pie_chart.py
-          pytest -v tests/test_date_data.py
-          pytest -v tests/test_requesting_data.py
-          pytest -v tests/test_state_data.py
-
+        run: pytest
+        
   build:
     runs-on: ubuntu-latest
     env:
@@ -107,10 +97,22 @@ jobs:
         run: ls -R src
 
       - name: Run mypy
-        run: |
-          mypy src/apc524_election2024/data_cleaning.py
-          mypy src/apc524_election2024/date_data.py
-          mypy src/apc524_election2024/pie_chart.py
-          mypy src/apc524_election2024/requesting_data.py
-          mypy src/apc524_election2024/scraper.py
-          mypy src/apc524_election2024/state_data.py
+        run: mypy src
+
+  pre-commit:
+    name: Run pre-commit hooks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      - name: Run pre-commit
+        run: pre-commit run --all-files
