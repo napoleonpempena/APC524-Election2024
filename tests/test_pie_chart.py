@@ -1,5 +1,5 @@
 import pandas as pd
-from src.apc524_election2024.pie_chart import pie_chart
+from apc524_election2024.pie_chart import pie_chart
 
 
 def test_pie_chart_no_state_no_date(mocker):

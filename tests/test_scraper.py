@@ -1,6 +1,6 @@
 import os
 from unittest.mock import patch, Mock
-from src.apc524_election2024.scraper import build_path, pour_soup, main
+from apc524_election2024.scraper import build_path, pour_soup, main
 
 
 def test_build_path_national():

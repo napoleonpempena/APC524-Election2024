@@ -1,7 +1,7 @@
 import json
 from unittest.mock import patch, mock_open
 from requests.exceptions import HTTPError, ConnectionError, Timeout
-from src.apc524_election2024.requesting_data import fetch_election_data
+from apc524_election2024.requesting_data import fetch_election_data
 
 
 @patch("requests.get")

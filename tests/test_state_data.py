@@ -1,5 +1,5 @@
 import pandas as pd
-from src.apc524_election2024.state_data import get_state_data
+from apc524_election2024.state_data import get_state_data
 
 
 def test_get_state_data():
