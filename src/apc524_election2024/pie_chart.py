@@ -30,7 +30,7 @@ def pie_chart(combined_df=None, state=None, date=None) -> None:
 
     threshold: float = 0.02  # 2% threshold
     total_votes: int = combined_df["votes"].sum()
-    combined_df["percentage"]: pd.Series = combined_df["votes"] / total_votes
+    combined_df["percentage"] = combined_df["votes"] / total_votes
 
     major_candidates: pd.DataFrame = combined_df[combined_df["percentage"] >= threshold]
     other_candidates: pd.DataFrame = combined_df[combined_df["percentage"] < threshold]

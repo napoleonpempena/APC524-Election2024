@@ -24,6 +24,12 @@ test = [
     "pandas",
     "requests"
 ]
+mypy = [
+    "types-requests",
+    "types-beautifulsoup4",
+    "pandas-stubs",
+]
+
 
 docs = [
     "sphinx",

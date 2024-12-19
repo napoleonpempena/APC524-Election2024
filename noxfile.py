@@ -33,4 +33,9 @@ def typecheck(session: nox.Session) -> None:
     Run type checking using mypy.
     """
     session.install("mypy")
-    session.run("mypy", "src")
+    session.install(
+        "types-requests",
+        "types-beautifulsoup4",
+        "pandas-stubs"
+    )
+    session.run("mypy", "--ignore-missing-imports", "src")
