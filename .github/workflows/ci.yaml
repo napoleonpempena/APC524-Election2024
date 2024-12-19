@@ -57,6 +57,9 @@ jobs:
       - name: Install requests dependency
         run: pip install requests
 
+      - name: Install pytest-mock dependency
+        run: pip install pytest-mock
+
   formatter:
     name: Code Formatter Check
     runs-on: ubuntu-latest

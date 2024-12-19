@@ -1,4 +1,5 @@
 import pandas as pd
+import pytest
 from apc524_election2024.pie_chart import pie_chart
 
 
@@ -49,7 +50,7 @@ def test_pie_chart_with_other_category(mocker):
 
     assert True  # If no exception is raised, the test passes
 
-
+@pytest.mark.filterwarnings("ignore:invalid value encountered in divide")
 def test_pie_chart_empty_dataframe(mocker):
     df = pd.DataFrame(columns=["candidate_name", "votes"])
 
