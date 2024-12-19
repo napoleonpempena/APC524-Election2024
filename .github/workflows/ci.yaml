@@ -60,14 +60,7 @@ jobs:
       - name: Install pytest-mock dependency
         run: pip install pytest-mock
 
-      - name: Install types-requests
-        run: pip install types-requests
-      
-      - name: Install types-beautifulsoup4
-        run: pip install types-beautifulsoup4
 
-      - name: Install pandas-stubs
-        run: pip install pandas-stubs
 
   formatter:
     name: Code Formatter Check
@@ -124,6 +117,15 @@ jobs:
 
       - name: Install mypy
         run: pip install mypy
+
+      - name: Install types-requests
+        run: pip install types-requests
+      
+      - name: Install types-beautifulsoup4
+        run: pip install types-beautifulsoup4
+
+      - name: Install pandas-stubs
+        run: pip install pandas-stubs
 
       - name: Run mypy
         run: mypy src
