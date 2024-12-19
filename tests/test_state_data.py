@@ -38,8 +38,8 @@ def test_get_state_data_no_data():
     state = "Texas"
     state_df, combined_df = get_state_data(state, df)
 
-    expected_state_df = pd.DataFrame(columns=["candidate_name", "votes"])
-    expected_combined_df = pd.DataFrame(columns=["candidate_name", "votes"])
+    expected_state_df = pd.DataFrame(columns=["candidate_name", "votes"]).astype({"candidate_name": "object", "votes": "int64"})
+    expected_combined_df = pd.DataFrame(columns=["candidate_name", "votes"]).astype({"candidate_name": "object", "votes": "int64"})
 
     pd.testing.assert_frame_equal(state_df, expected_state_df)
     pd.testing.assert_frame_equal(combined_df, expected_combined_df)

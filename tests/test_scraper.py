@@ -21,7 +21,7 @@ def test_build_path_state():
     assert build_path(site, poll_type, jurisdiction) == expected_path
 
 
-@patch("src.apc524_election2024.scraper.requests.get")
+@patch("apc524_election2024.scraper.requests.get")
 def test_pour_soup(mock_get):
     mock_response = Mock()
     mock_response.content = "<html><head><title>Test</title></head><body></body></html>"
@@ -32,7 +32,7 @@ def test_pour_soup(mock_get):
     assert soup.title.string == "Test"
 
 
-@patch("src.apc524_election2024.scraper.pour_soup")
+@patch("apc524_election2024.scraper.pour_soup")
 def test_main(mock_pour_soup):
     mock_soup = Mock()
     mock_pour_soup.return_value = mock_soup
