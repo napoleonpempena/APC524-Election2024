@@ -1,13 +1,13 @@
 import pandas as pd
-from pie_chart import pie_chart
+from apc524_election2024.pie_chart import pie_chart
 
 
-def get_state_data(state, df):
+def get_state_data(state: str, df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Extracts and processes election data for a specific state from a DataFrame.
 
     Parameters:
-    state (str): The name of the state for which to extract data.
+    state (str): The name of the state for which to extract data
     df (pandas.DataFrame): The DataFrame containing election data
 
     Returns:

@@ -1,8 +1,8 @@
 import pandas as pd
-from pie_chart import pie_chart
+from apc524_election2024.pie_chart import pie_chart
 
 
-def get_date_data(date, df):
+def get_date_data(date: str, df: pd.DataFrame) -> tuple:
     """
     Extracts and processes data for a specific date from election DataFrame.
 

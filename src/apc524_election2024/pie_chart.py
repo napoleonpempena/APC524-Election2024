@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def pie_chart(combined_df, state=None, date=None):
+def pie_chart(combined_df=None, state=None, date=None) -> None:
     """
     Generates a pie chart for poll results.
 
@@ -28,19 +28,21 @@ def pie_chart(combined_df, state=None, date=None):
     else:
         date_str = f"on {date}"
 
-    threshold = 0.02  # 2% threshold
-    total_votes = combined_df["votes"].sum()
+    threshold: float = 0.02  # 2% threshold
+    total_votes: int = combined_df["votes"].sum()
     combined_df["percentage"] = combined_df["votes"] / total_votes
 
-    major_candidates = combined_df[combined_df["percentage"] >= threshold]
-    other_candidates = combined_df[combined_df["percentage"] < threshold]
+    major_candidates: pd.DataFrame = combined_df[combined_df["percentage"] >= threshold]
+    other_candidates: pd.DataFrame = combined_df[combined_df["percentage"] < threshold]
 
-    other_votes = other_candidates["votes"].sum()
-    other_row = pd.DataFrame(
+    other_votes: int = other_candidates["votes"].sum()
+    other_row: pd.DataFrame = pd.DataFrame(
         [["Other", other_votes]], columns=["candidate_name", "votes"]
     )
 
-    final_data = pd.concat([major_candidates, other_row], ignore_index=True)
+    final_data: pd.DataFrame = pd.concat(
+        [major_candidates, other_row], ignore_index=True
+    )
 
     plt.figure(figsize=(10, 10))
     plt.pie(

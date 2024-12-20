@@ -19,15 +19,28 @@ dependencies = [
 [project.optional-dependencies]
 test = [
     "pytest",
+    "pytest-mock",
     "nox",
-    "pandas"
+    "pandas",
+    "requests"
 ]
+mypy = [
+    "types-requests",
+    "types-beautifulsoup4",
+    "pandas-stubs",
+]
+
 
 docs = [
     "sphinx",
     "furo",
     "myst_parser"
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
 
 [tool.ruff.lint]
 extend-select = [

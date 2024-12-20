@@ -1,5 +1,6 @@
 import nox
 
+
 @nox.session
 def tests(session: nox.Session) -> None:
     """
@@ -25,3 +26,16 @@ def docs(session: nox.Session) -> None:
             session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
         else:
             print("Unsupported argument to docs")
+
+@nox.session
+def typecheck(session: nox.Session) -> None:
+    """
+    Run type checking using mypy.
+    """
+    session.install("mypy")
+    session.install(
+        "types-requests",
+        "types-beautifulsoup4",
+        "pandas-stubs"
+    )
+    session.run("mypy", "--ignore-missing-imports", "src")
